@@ -12,7 +12,7 @@
 5. 支持当value和属性名找不到匹配的key时，对象是否匹配所有属性。
 
 ## 参考资料
-对应博文： [https://blog.csdn.net/w605283073/article/details/82119284](明明如月小角落)
-其他参考：[https://stackoverflow.com/questions/12893566/passing-multiple-variables-in-requestbody-to-a-spring-mvc-controller-using-ajax](StackOverFlow讨论)
+* 对应博文： [https://blog.csdn.net/w605283073/article/details/82119284](明明如月小角落)
+* 其他参考：[https://stackoverflow.com/questions/12893566/passing-multiple-variables-in-requestbody-to-a-spring-mvc-controller-using-ajax](StackOverFlow讨论)
 
 
