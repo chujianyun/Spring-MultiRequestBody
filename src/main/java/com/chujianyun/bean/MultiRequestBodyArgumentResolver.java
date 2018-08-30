@@ -66,7 +66,7 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         MultiRequestBody parameterAnnotation = parameter.getParameterAnnotation(MultiRequestBody.class);
         //注解的value是JSON的key
         String key = parameterAnnotation.value();
-        Object value = null;
+        Object value;
         // 如果@MultiRequestBody注解没有设置value，则取参数名FrameworkServlet作为json解析的key
         if (StringUtils.isNotEmpty(key)) {
             value = jsonObject.get(key);
