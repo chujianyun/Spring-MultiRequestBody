@@ -1,14 +1,15 @@
-package com.chujianyun.domain;
+package io.github.chujianyun.domain;
 
 /**
- * @author 明明如月
+ * @author  Wangyang Liu
  * @date 2018/08/27
  */
-public class User {
+public class Dog {
 
     private String name;
 
-    private Integer age;
+    private String color;
+
 
     public String getName() {
         return name;
@@ -18,19 +19,19 @@ public class User {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getColor() {
+        return color;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Dog{" +
                 "name='" + name + '\'' +
-                ", age=" + age +
+                ", color='" + color + '\'' +
                 '}';
     }
 }

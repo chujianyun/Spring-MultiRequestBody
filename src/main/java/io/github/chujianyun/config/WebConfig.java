@@ -1,6 +1,6 @@
-package com.chujianyun.config;
+package io.github.chujianyun.config;
 
-import com.chujianyun.bean.MultiRequestBodyArgumentResolver;
+import io.github.chujianyun.bean.MultiRequestBodyArgumentResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -12,8 +12,9 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
- * webmvc配置
- * @author 刘汪洋
+ * Web Config Demo
+ *
+ * @author Wangyang Liu   liuwangyangedu@163.com
  * @date 2018/08/27
  */
 @Configuration

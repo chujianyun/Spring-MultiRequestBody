@@ -52,6 +52,26 @@
 
     </dependencies>
 
+    <licenses>
+        <license>
+            <name>GNU General Public License, version 2</name>
+            <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/chujianyun/Spring-MultiRequestBody</url>
+        <connection>https://github.com/chujianyun/Spring-MultiRequestBody.git</connection>
+        <developerConnection>https://github.com/chujianyun/Spring-MultiRequestBody</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>liuwangyang</name>
+            <email> liuwangyangedu@163.com</email>
+            <url>https://github.com/chujianyun</url>
+        </developer>
+    </developers>
+
     <build>
         <pluginManagement>
             <plugins>

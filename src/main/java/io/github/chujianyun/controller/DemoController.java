@@ -1,15 +1,16 @@
-package com.chujianyun.controller;
+package io.github.chujianyun.controller;
 
 
-import com.chujianyun.annotation.MultiRequestBody;
-import com.chujianyun.domain.Dog;
-import com.chujianyun.domain.User;
+import io.github.chujianyun.annotation.MultiRequestBody;
+import io.github.chujianyun.domain.Dog;
+import io.github.chujianyun.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author 明明如月
+ * Controller Demo
+ * @author Wangyang Liu
  * @date 2018/08/27
  */
 @Controller

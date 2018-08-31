@@ -1,8 +1,8 @@
-package com.chujianyun.bean;
+package io.github.chujianyun.bean;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.chujianyun.annotation.MultiRequestBody;
+import io.github.chujianyun.annotation.MultiRequestBody;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -33,7 +33,7 @@ import java.util.Set;
  * 4、支持多余属性(不解析、不报错)、支持参数“共用”（不指定value时，参数名不为JSON串的key）
  *
  * 5、支持当value和属性名找不到匹配的key时，对象是否匹配所有属性。
- * @author 明明如月
+ * @author Wangyang Liu
  * @date 2018/08/27
  */
 public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentResolver {

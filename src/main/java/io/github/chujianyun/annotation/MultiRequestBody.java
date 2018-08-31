@@ -1,4 +1,4 @@
-package com.chujianyun.annotation;
+package io.github.chujianyun.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * Controller中方法接收多个JSON对象
  *
- * @author 明明如月
+ * @author Wangyang Liu
  * @date 2018/08/27
  */
 @Target(ElementType.PARAMETER)

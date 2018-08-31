@@ -1,7 +1,7 @@
-package com.chujianyun.domain;
+package io.github.chujianyun.domain;
 
 /**
- * @author 明明如月
+ * @author  Wangyang Liu
  * @date 2018/08/28
  */
 public class Dog2 {
