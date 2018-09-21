@@ -80,12 +80,10 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
             value = jsonObject.get(key);
         }
 
+        // 获取的注解后的类型 Long
         Class<?> parameterType = parameter.getParameterType();
         // 通过注解的value或者参数名解析，能拿到value进行解析
         if (value != null) {
-            if (isBasicDataTypes(parameterType)) {
-                return value;
-            }
             return JSON.parseObject(value.toString(), parameterType);
         }
 

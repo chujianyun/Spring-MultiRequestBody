@@ -17,6 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/xhr/test")
 public class DemoController {
 
+
+    @RequestMapping("/demo22")
+    @ResponseBody
+    public String multiRequestBodyDemo1(@MultiRequestBody Long id) {
+
+        System.out.println(id);
+        return "";
+    }
     @RequestMapping("/demo")
     @ResponseBody
     public String multiRequestBodyDemo1(@MultiRequestBody Dog dog, @MultiRequestBody User user) {
