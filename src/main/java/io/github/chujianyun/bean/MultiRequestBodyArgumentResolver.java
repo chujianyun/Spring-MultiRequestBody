@@ -88,7 +88,7 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         }
 
         // 解析不到则将整个json串解析为当前参数类型
-        if (isBasicDataTypes(parameterType)) {
+        if (parameterType.isPrimitive()) {
             if (parameterAnnotation.required()) {
                 throw new IllegalArgumentException(String.format("required param %s is not present", key));
             } else {
@@ -128,21 +128,6 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         }
     }
 
-    /**
-     * 基本数据类型直接返回
-     */
-    private boolean isBasicDataTypes(Class clazz) {
-        Set<Class> classSet = new HashSet<>();
-        classSet.add(String.class);
-        classSet.add(Integer.class);
-        classSet.add(Long.class);
-        classSet.add(Short.class);
-        classSet.add(Float.class);
-        classSet.add(Double.class);
-        classSet.add(Boolean.class);
-        classSet.add(Character.class);
-        return classSet.contains(clazz);
-    }
 
     /**
      * 获取请求体JSON字符串
