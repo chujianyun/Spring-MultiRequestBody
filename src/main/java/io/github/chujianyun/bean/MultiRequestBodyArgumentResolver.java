@@ -84,11 +84,31 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         Class<?> parameterType = parameter.getParameterType();
         // 通过注解的value或者参数名解析，能拿到value进行解析
         if (value != null) {
+            if(isBasicDataTypes(parameterType)){
+                if(parameterType.isAssignableFrom(Number.class)){
+                    Number number = (Number) value;
+                    if(parameterType == Integer.class){
+                        return number.intValue();
+                    }else if(parameterType == Short.class){
+                        return number.shortValue();
+                    }else if(parameterType ==  Long.class){
+                        return number.longValue();
+                    }else if(parameterType ==  Float.class){
+                        return number.floatValue();
+                    }else if(parameterType ==  Double.class){
+                        return number.doubleValue();
+                    }
+                }else if(parameterType == Character.class){
+                    return value.toString().charAt(0);
+                }else if(parameterType == String.class){
+                    return value.toString();
+                }
+            }
             return JSON.parseObject(value.toString(), parameterType);
         }
 
         // 解析不到则将整个json串解析为当前参数类型
-        if (parameterType.isPrimitive()) {
+        if (isBasicDataTypes(parameterType)) {
             if (parameterAnnotation.required()) {
                 throw new IllegalArgumentException(String.format("required param %s is not present", key));
             } else {
@@ -127,6 +147,22 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
             return result;
         }
     }
+    /**
+     * 基本数据类型直接返回
+     */
+    private boolean isBasicDataTypes(Class clazz) {
+        Set<Class> classSet = new HashSet<>();
+        classSet.add(String.class);
+        classSet.add(Integer.class);
+        classSet.add(Long.class);
+        classSet.add(Short.class);
+        classSet.add(Float.class);
+        classSet.add(Double.class);
+        classSet.add(Boolean.class);
+        classSet.add(Character.class);
+        return classSet.contains(clazz);
+    }
+
 
 
     /**

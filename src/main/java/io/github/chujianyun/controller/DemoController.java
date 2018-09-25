@@ -81,4 +81,9 @@ public class DemoController {
     public String multiRequestBodyDemo10( @MultiRequestBody(parseAllFields = false,required = false) Dog dog) {
         return dog.toString();
     }
+    @RequestMapping("/demo99")
+    @ResponseBody
+    public String multiRequestBodyDemo99( @MultiRequestBody(parseAllFields = false,required = false) Character demo) {
+        return demo.toString();
+    }
 }
