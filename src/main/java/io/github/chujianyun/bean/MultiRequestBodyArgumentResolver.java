@@ -97,6 +97,8 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
                         return number.floatValue();
                     }else if(parameterType ==  Double.class){
                         return number.doubleValue();
+                    }else if(parameterType == Byte.class){
+                        return number.byteValue();
                     }
                 }else if(parameterType == Character.class){
                     return value.toString().charAt(0);
@@ -159,6 +161,7 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         classSet.add(Float.class);
         classSet.add(Double.class);
         classSet.add(Boolean.class);
+        classSet.add(Byte.class);
         classSet.add(Character.class);
         return classSet.contains(clazz);
     }
