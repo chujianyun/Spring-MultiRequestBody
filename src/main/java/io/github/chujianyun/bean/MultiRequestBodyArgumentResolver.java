@@ -144,34 +144,38 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
 
 
     private Object parsePrimitive(String parameterTypeName,Object value){
-
-        if("boolean".equals(parameterTypeName)){
+        final String booleanTypeName = "boolean";
+        if(booleanTypeName.equals(parameterTypeName)){
             return Boolean.valueOf(value.toString());
         }
-        if("int".equals(parameterTypeName)){
+        final String intTypeName = "int";
+        if(intTypeName.equals(parameterTypeName)){
             return Integer.valueOf(value.toString());
         }
-        if("char".equals(parameterTypeName)){
+        final String charTypeName = "char";
+        if(charTypeName.equals(parameterTypeName)){
             return value.toString().charAt(0);
         }
-        if("short".equals(parameterTypeName)){
+        final String shortTypeName = "short";
+        if(shortTypeName.equals(parameterTypeName)){
             return Short.valueOf(value.toString());
         }
-        if("long".equals(parameterTypeName)){
+        final String longTypeName ="long";
+        if(longTypeName.equals(parameterTypeName)){
             return Long.valueOf(value.toString());
         }
-        if("float".equals(parameterTypeName)){
+        final String floatTypeName = "float";
+        if(floatTypeName.equals(parameterTypeName)){
             return Float.valueOf(value.toString());
         }
-
-        if("double".equals(parameterTypeName)){
+        final String doubleTypeName = "double";
+        if(doubleTypeName.equals(parameterTypeName)){
             return Double.valueOf(value.toString());
         }
-
-        if("byte".equals(parameterTypeName)){
+        final String byteTypeName = "byte";
+        if(byteTypeName.equals(parameterTypeName)){
             return Byte.valueOf(value.toString());
         }
-
         return null;
     }
 
