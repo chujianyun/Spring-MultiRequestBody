@@ -21,20 +21,17 @@ import java.util.Set;
  * MultiRequestBody解析器
  * 解决的问题：
  * 1、单个字符串等包装类型都要写一个对象才可以用@RequestBody接收；
- * <p>
  * 2、多个对象需要封装到一个对象里才可以用@RequestBody接收。
- * 本功能的作用：
+ * 主要优势：
  * 1、支持通过注解的value指定JSON的key来解析对象。
- * <p>
  * 2、支持通过注解无value，直接根据参数名来解析对象
- * <p>
- * 3、支持通过注解无value且参数名不匹配JSON串key时，根据属性解析对象。
- * <p>
- * 4、支持多余属性(不解析、不报错)、支持参数“共用”（不指定value时，参数名不为JSON串的key）
- * <p>
- * 5、支持当value和属性名找不到匹配的key时，对象是否匹配所有属性。
+ * 3、支持基本类型的注入
+ * 4、支持GET请求方式注入
+ * 5、支持通过注解无value且参数名不匹配JSON串key时，根据属性解析对象。
+ * 6、支持多余属性(不解析、不报错)、支持参数“共用”（不指定value时，参数名不为JSON串的key）
+ * 7、支持当value和属性名找不到匹配的key时，对象是否匹配所有属性。
  *
- * @author Wangyang Liu
+ * @author Wangyang Liu  QQ: 605283073
  * @date 2018/08/27
  */
 public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentResolver {
