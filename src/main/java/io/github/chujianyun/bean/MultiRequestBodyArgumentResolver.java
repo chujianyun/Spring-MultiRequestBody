@@ -84,6 +84,11 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         Class<?> parameterType = parameter.getParameterType();
         // 通过注解的value或者参数名解析，能拿到value进行解析
         if (value != null) {
+            //基本类型
+            if(parameterType.isPrimitive()){
+                return value.toString();
+            }
+            //基本类型包装类
             if(isBasicDataTypes(parameterType)){
                 if(Number.class.isAssignableFrom(parameterType)){
                     Number number = (Number) value;
@@ -100,11 +105,13 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
                     }else if(parameterType == Byte.class){
                         return number.byteValue();
                     }
+                }else if(parameterType == Boolean.class){
+                    return value.toString();
                 }else if(parameterType == Character.class){
                     return value.toString().charAt(0);
-                }else if(parameterType == String.class){
-                    return value.toString();
                 }
+            }else if(parameterType == String.class){
+                return value.toString();
             }
             return JSON.parseObject(value.toString(), parameterType);
         }
