@@ -143,6 +143,9 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
     }
 
 
+    /**
+     * 基本类型解析
+     */
     private Object parsePrimitive(String parameterTypeName,Object value){
         final String booleanTypeName = "boolean";
         if(booleanTypeName.equals(parameterTypeName)){
@@ -179,6 +182,9 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         return null;
     }
 
+    /**
+     * 基本类型包装类解析
+     */
     private Object parseBasicTypeWrapper(Class<?> parameterType,Object value){
         if(Number.class.isAssignableFrom(parameterType)){
             Number number = (Number) value;
@@ -203,7 +209,7 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         return null;
     }
     /**
-     * 基本数据类型直接返回
+     * 判断是否为基本数据类型包装类
      */
     private boolean isBasicDataTypes(Class clazz) {
         Set<Class> classSet = new HashSet<>();
