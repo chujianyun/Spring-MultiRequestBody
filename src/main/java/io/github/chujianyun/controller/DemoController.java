@@ -20,7 +20,7 @@ public class DemoController {
 
     @RequestMapping("/demo22")
     @ResponseBody
-    public String multiRequestBodyDemo1(@MultiRequestBody Long id) {
+    public String multiRequestBodyDemo1(@MultiRequestBody char id) {
 
         System.out.println(id);
         return "";

@@ -14,7 +14,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -86,33 +88,16 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         if (value != null) {
             //基本类型
             if(parameterType.isPrimitive()){
-                return value.toString();
+                return parsePrimitive(parameterType.getName(),value);
             }
-            //基本类型包装类
+            // 基本类型包装类
             if(isBasicDataTypes(parameterType)){
-                if(Number.class.isAssignableFrom(parameterType)){
-                    Number number = (Number) value;
-                    if(parameterType == Integer.class){
-                        return number.intValue();
-                    }else if(parameterType == Short.class){
-                        return number.shortValue();
-                    }else if(parameterType ==  Long.class){
-                        return number.longValue();
-                    }else if(parameterType ==  Float.class){
-                        return number.floatValue();
-                    }else if(parameterType ==  Double.class){
-                        return number.doubleValue();
-                    }else if(parameterType == Byte.class){
-                        return number.byteValue();
-                    }
-                }else if(parameterType == Boolean.class){
-                    return value.toString();
-                }else if(parameterType == Character.class){
-                    return value.toString().charAt(0);
-                }
+                return parseBasicTypeWrapper(parameterType, value);
+                // 字符串类型
             }else if(parameterType == String.class){
                 return value.toString();
             }
+            // 其他复杂对象
             return JSON.parseObject(value.toString(), parameterType);
         }
 
@@ -155,6 +140,63 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
             }
             return result;
         }
+    }
+
+
+    private Object parsePrimitive(String parameterTypeName,Object value){
+
+        if("boolean".equals(parameterTypeName)){
+            return Boolean.valueOf(value.toString());
+        }
+        if("int".equals(parameterTypeName)){
+            return Integer.valueOf(value.toString());
+        }
+        if("char".equals(parameterTypeName)){
+            return value.toString().charAt(0);
+        }
+        if("short".equals(parameterTypeName)){
+            return Short.valueOf(value.toString());
+        }
+        if("long".equals(parameterTypeName)){
+            return Long.valueOf(value.toString());
+        }
+        if("float".equals(parameterTypeName)){
+            return Float.valueOf(value.toString());
+        }
+
+        if("double".equals(parameterTypeName)){
+            return Double.valueOf(value.toString());
+        }
+
+        if("byte".equals(parameterTypeName)){
+            return Byte.valueOf(value.toString());
+        }
+
+        return null;
+    }
+
+    private Object parseBasicTypeWrapper(Class<?> parameterType,Object value){
+        if(Number.class.isAssignableFrom(parameterType)){
+            Number number = (Number) value;
+            if(parameterType == Integer.class){
+                return number.intValue();
+            }else if(parameterType == Short.class){
+                return number.shortValue();
+            }else if(parameterType ==  Long.class){
+                return number.longValue();
+            }else if(parameterType ==  Float.class){
+                return number.floatValue();
+            }else if(parameterType ==  Double.class){
+                return number.doubleValue();
+            }else if(parameterType == Byte.class){
+                return number.byteValue();
+            }
+        }else if(parameterType == Boolean.class){
+            return value.toString();
+        }else if(parameterType == Character.class){
+            return value.toString().charAt(0);
+        }
+        return null;
     }
     /**
      * 基本数据类型直接返回
