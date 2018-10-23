@@ -23,18 +23,19 @@ import java.util.Set;
  * MultiRequestBody解析器
  * 解决的问题：
  * 1、单个字符串等包装类型都要写一个对象才可以用@RequestBody接收；
- *
+ * <p>
  * 2、多个对象需要封装到一个对象里才可以用@RequestBody接收。
  * 本功能的作用：
  * 1、支持通过注解的value指定JSON的key来解析对象。
- *
+ * <p>
  * 2、支持通过注解无value，直接根据参数名来解析对象
- *
+ * <p>
  * 3、支持通过注解无value且参数名不匹配JSON串key时，根据属性解析对象。
- *
+ * <p>
  * 4、支持多余属性(不解析、不报错)、支持参数“共用”（不指定value时，参数名不为JSON串的key）
- *
+ * <p>
  * 5、支持当value和属性名找不到匹配的key时，对象是否匹配所有属性。
+ *
  * @author Wangyang Liu
  * @date 2018/08/27
  */
@@ -87,14 +88,14 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         // 通过注解的value或者参数名解析，能拿到value进行解析
         if (value != null) {
             //基本类型
-            if(parameterType.isPrimitive()){
-                return parsePrimitive(parameterType.getName(),value);
+            if (parameterType.isPrimitive()) {
+                return parsePrimitive(parameterType.getName(), value);
             }
             // 基本类型包装类
-            if(isBasicDataTypes(parameterType)){
+            if (isBasicDataTypes(parameterType)) {
                 return parseBasicTypeWrapper(parameterType, value);
                 // 字符串类型
-            }else if(parameterType == String.class){
+            } else if (parameterType == String.class) {
                 return value.toString();
             }
             // 其他复杂对象
@@ -120,63 +121,62 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
             // 否则返回空对象
             return result;
         }
-       // 非基本类型，允许解析，将外层属性解析
+        // 非基本类型，允许解析，将外层属性解析
         result = JSON.parseObject(jsonObject.toString(), parameterType);
         // 如果非必要参数直接返回，否则如果没有一个属性有值则报错
         if (!parameterAnnotation.required()) {
-                return result;
-        }else{
+            return result;
+        } else {
             boolean haveValue = false;
             Field[] declaredFields = parameterType.getDeclaredFields();
-            for(Field field : declaredFields){
+            for (Field field : declaredFields) {
                 field.setAccessible(true);
-                if(field.get(result) != null){
+                if (field.get(result) != null) {
                     haveValue = true;
                     break;
                 }
             }
-            if(!haveValue){
+            if (!haveValue) {
                 throw new IllegalArgumentException(String.format("required param %s is not present", key));
             }
             return result;
         }
     }
 
-
     /**
      * 基本类型解析
      */
-    private Object parsePrimitive(String parameterTypeName,Object value){
+    private Object parsePrimitive(String parameterTypeName, Object value) {
         final String booleanTypeName = "boolean";
-        if(booleanTypeName.equals(parameterTypeName)){
+        if (booleanTypeName.equals(parameterTypeName)) {
             return Boolean.valueOf(value.toString());
         }
         final String intTypeName = "int";
-        if(intTypeName.equals(parameterTypeName)){
+        if (intTypeName.equals(parameterTypeName)) {
             return Integer.valueOf(value.toString());
         }
         final String charTypeName = "char";
-        if(charTypeName.equals(parameterTypeName)){
+        if (charTypeName.equals(parameterTypeName)) {
             return value.toString().charAt(0);
         }
         final String shortTypeName = "short";
-        if(shortTypeName.equals(parameterTypeName)){
+        if (shortTypeName.equals(parameterTypeName)) {
             return Short.valueOf(value.toString());
         }
-        final String longTypeName ="long";
-        if(longTypeName.equals(parameterTypeName)){
+        final String longTypeName = "long";
+        if (longTypeName.equals(parameterTypeName)) {
             return Long.valueOf(value.toString());
         }
         final String floatTypeName = "float";
-        if(floatTypeName.equals(parameterTypeName)){
+        if (floatTypeName.equals(parameterTypeName)) {
             return Float.valueOf(value.toString());
         }
         final String doubleTypeName = "double";
-        if(doubleTypeName.equals(parameterTypeName)){
+        if (doubleTypeName.equals(parameterTypeName)) {
             return Double.valueOf(value.toString());
         }
         final String byteTypeName = "byte";
-        if(byteTypeName.equals(parameterTypeName)){
+        if (byteTypeName.equals(parameterTypeName)) {
             return Byte.valueOf(value.toString());
         }
         return null;
@@ -185,29 +185,30 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
     /**
      * 基本类型包装类解析
      */
-    private Object parseBasicTypeWrapper(Class<?> parameterType,Object value){
-        if(Number.class.isAssignableFrom(parameterType)){
+    private Object parseBasicTypeWrapper(Class<?> parameterType, Object value) {
+        if (Number.class.isAssignableFrom(parameterType)) {
             Number number = (Number) value;
-            if(parameterType == Integer.class){
+            if (parameterType == Integer.class) {
                 return number.intValue();
-            }else if(parameterType == Short.class){
+            } else if (parameterType == Short.class) {
                 return number.shortValue();
-            }else if(parameterType ==  Long.class){
+            } else if (parameterType == Long.class) {
                 return number.longValue();
-            }else if(parameterType ==  Float.class){
+            } else if (parameterType == Float.class) {
                 return number.floatValue();
-            }else if(parameterType ==  Double.class){
+            } else if (parameterType == Double.class) {
                 return number.doubleValue();
-            }else if(parameterType == Byte.class){
+            } else if (parameterType == Byte.class) {
                 return number.byteValue();
             }
-        }else if(parameterType == Boolean.class){
+        } else if (parameterType == Boolean.class) {
             return value.toString();
-        }else if(parameterType == Character.class){
+        } else if (parameterType == Character.class) {
             return value.toString().charAt(0);
         }
         return null;
     }
+
     /**
      * 判断是否为基本数据类型包装类
      */
@@ -224,8 +225,6 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
         classSet.add(Character.class);
         return classSet.contains(clazz);
     }
-
-
 
     /**
      * 获取请求体JSON字符串
