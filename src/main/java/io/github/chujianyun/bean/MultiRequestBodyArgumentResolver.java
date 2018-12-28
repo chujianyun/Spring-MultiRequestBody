@@ -209,7 +209,6 @@ public class MultiRequestBodyArgumentResolver implements HandlerMethodArgumentRe
      */
     private boolean isBasicDataTypes(Class clazz) {
         Set<Class> classSet = new HashSet<>();
-        classSet.add(String.class);
         classSet.add(Integer.class);
         classSet.add(Long.class);
         classSet.add(Short.class);
