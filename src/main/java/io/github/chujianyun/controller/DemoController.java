@@ -18,7 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DemoController {
 
 
-    @RequestMapping("/demo22")
+
+    @RequestMapping("/testStr")
+    @ResponseBody
+    public String multiRequestBodyDemo1(@MultiRequestBody String test1,@MultiRequestBody  String test2) {
+
+        System.out.println(test1 +"-->" + test2);
+        return "";
+    }
+
+    @RequestMapping("/testChar")
     @ResponseBody
     public String multiRequestBodyDemo1(@MultiRequestBody char id) {
 
