@@ -13,6 +13,10 @@
 6. 支持多余属性(不解析、不报错)、支持参数“共用”（不指定value时，参数名不为JSON串的key）
 7. 支持当value和属性名找不到匹配的key时，对象是否匹配所有属性。
 
+## 重要更新记录
+2019年02月07日  fix 当list参数为空时，parameterType.newInstance会导致异常
+
+
 ## 参考资料
 * 对应博文： [明明如月小角落CSDN](https://blog.csdn.net/w605283073/article/details/82119284)
 * 其他参考：[StackOverFlow讨论](https://stackoverflow.com/questions/12893566/passing-multiple-variables-in-requestbody-to-a-spring-mvc-controller-using-ajax)
