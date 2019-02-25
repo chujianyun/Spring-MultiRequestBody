@@ -14,8 +14,8 @@
 7. 支持当value和属性名找不到匹配的key时，对象是否匹配所有属性。
 
 ## 重要更新记录
+2019年02月25日 新增xml方式参考配置
 2019年02月07日  fix 当list参数为空时，parameterType.newInstance会导致异常
-
 
 ## 参考资料
 * 对应博文： [明明如月小角落CSDN](https://blog.csdn.net/w605283073/article/details/82119284)

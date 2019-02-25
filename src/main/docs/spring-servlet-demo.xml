@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 参考配置文件-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:xxxx.properties"/>
+
+
+
+    <mvc:default-servlet-handler/>
+    <context:component-scan base-package="com.xxx.**,"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json</value>
+                        <value>text/html</value>
+                        <value>text/plain</value>
+                    </list>
+                </property>
+                <property name="fastJsonConfig" ref="fastJsonConfig"/>
+            </bean>
+        </mvc:message-converters>
+
+        <mvc:argument-resolvers>
+            <bean class="io.github.chujianyun.bean.MultiRequestBodyArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <bean name="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+        <property name="serializerFeatures">
+            <list>
+                <!-- 输出key时是否使用双引号 -->
+                <value>QuoteFieldNames</value>
+                <!-- 是否输出值为null的字段 -->
+                <!-- <value>WriteMapNullValue</value> -->
+                <!-- 数值字段如果为null,输出为0,而非null -->
+                <!--<value>WriteNullNumberAsZero</value>-->
+                <!-- List字段如果为null,输出为[],而非null -->
+                <value>WriteNullListAsEmpty</value>
+                <!-- 字符类型字段如果为null,输出为"",而非null -->
+                <value>WriteNullStringAsEmpty</value>
+                <!-- Boolean字段如果为null,输出为false,而非null -->
+                <value>WriteNullBooleanAsFalse</value>
+                <!-- null String也要输出  -->
+                <!-- <value>WriteMapNullValue</value> -->
+                <!--<value>WriteDateUseDateFormat</value>-->
+                <value>PrettyFormat</value>
+                <value>DisableCircularReferenceDetect</value>
+            </list>
+        </property>
+        <property name="charset" value="UTF-8"/>
+    </bean>
+
+
+</beans>
